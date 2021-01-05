@@ -27,3 +27,10 @@ func (r *BookingPostgres) Create(booking *model.Booking) (int, error) {
 
 	return id, nil
 }
+
+func (r *BookingPostgres) Delete(id int) error {
+	query := fmt.Sprintf("DELETE FROM %s WHERE id=$1", bookingsTable)
+	_, err := r.db.Exec(query, id)
+
+	return err
+}

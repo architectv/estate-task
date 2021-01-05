@@ -13,6 +13,7 @@ type Room interface {
 
 type Booking interface {
 	Create(roomId int, dateStart, dateEnd string) (int, error)
+	Delete(id int) error
 }
 
 type Service struct {

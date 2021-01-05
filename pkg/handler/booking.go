@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"strconv"
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -25,7 +27,17 @@ func (h *Handler) createBooking(ctx *fiber.Ctx) error {
 }
 
 func (h *Handler) deleteBooking(ctx *fiber.Ctx) error {
-	return ctx.SendString(implementMe())
+	id, err := strconv.Atoi(ctx.Params("id"))
+	if err != nil {
+		return sendError(ctx, fiber.StatusBadRequest, err)
+	}
+
+	err = h.services.Booking.Delete(id)
+	if err != nil {
+		return sendError(ctx, fiber.StatusInternalServerError, err)
+	}
+
+	return ctx.JSON(fiber.Map{})
 }
 
 func (h *Handler) getBookingsByRoomId(ctx *fiber.Ctx) error {

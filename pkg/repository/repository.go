@@ -13,6 +13,7 @@ type Room interface {
 
 type Booking interface {
 	Create(booking *model.Booking) (int, error)
+	Delete(id int) error
 }
 
 type Repository struct {

@@ -27,8 +27,7 @@ func (s *BookingService) Create(roomId int, dateStartStr, dateEndStr string) (in
 	if err != nil {
 		return 0, errors.New("bad date_end")
 	}
-	// TODO: equal dates
-	if !dateStart.Before(dateEnd) {
+	if dateStart.After(dateEnd) {
 		return 0, errors.New("date_start after date_end")
 	}
 	booking := &model.Booking{
@@ -37,4 +36,11 @@ func (s *BookingService) Create(roomId int, dateStartStr, dateEndStr string) (in
 		DateEnd:   dateEnd,
 	}
 	return s.repo.Create(booking)
+}
+
+func (s *BookingService) Delete(id int) error {
+	if id <= 0 {
+		return errors.New("id should be positive")
+	}
+	return s.repo.Delete(id)
 }

@@ -42,6 +42,7 @@ func (h *Handler) getAllRooms(ctx *fiber.Ctx) error {
 	asc := true
 
 	sort := ctx.Query("sort")
+	// TODO: check sort in seervice
 	if len(sort) > 2 {
 		if sort[0] == '-' {
 			asc = false
