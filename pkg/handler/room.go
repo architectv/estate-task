@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"strconv"
 
 	"github.com/architectv/property-task/pkg/model"
@@ -36,5 +37,26 @@ func (h *Handler) deleteRoom(ctx *fiber.Ctx) error {
 }
 
 func (h *Handler) getAllRooms(ctx *fiber.Ctx) error {
-	return ctx.SendString(implementMe())
+	sortField := "id"
+	asc := true
+
+	sort := ctx.Query("sort")
+	if len(sort) > 2 {
+		if sort[0] == '-' {
+			asc = false
+			sort = sort[1:]
+		}
+	}
+	if sort == "price" || sort == "id" {
+		sortField = sort
+	} else {
+		return sendError(ctx, fiber.StatusBadRequest, errors.New("wrong sort param"))
+	}
+
+	rooms, err := h.services.Room.GetAllRooms(sortField, asc)
+	if err != nil {
+		return sendError(ctx, fiber.StatusInternalServerError, err)
+	}
+
+	return ctx.JSON(fiber.Map{"rooms": rooms})
 }

@@ -8,6 +8,7 @@ import (
 type Room interface {
 	Create(room *model.Room) (int, error)
 	Delete(id int) error
+	GetAllRooms(sortField string, asc bool) ([]*model.Room, error)
 }
 
 type Booking interface {
