@@ -49,7 +49,7 @@ func (h *Handler) getAllRooms(ctx *fiber.Ctx) error {
 	}
 	if sort == "price" || sort == "id" {
 		sortField = sort
-	} else {
+	} else if sort != "" {
 		return sendError(ctx, fiber.StatusBadRequest, errors.New("wrong sort param"))
 	}
 
