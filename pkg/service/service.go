@@ -7,6 +7,7 @@ import (
 
 type Room interface {
 	Create(room *model.Room) (int, error)
+	Delete(id int) error
 }
 
 type Booking interface {

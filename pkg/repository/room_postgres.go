@@ -27,3 +27,10 @@ func (r *RoomPostgres) Create(room *model.Room) (int, error) {
 
 	return id, nil
 }
+
+func (r *RoomPostgres) Delete(id int) error {
+	query := fmt.Sprintf("DELETE FROM %s WHERE id=$1", roomsTable)
+	_, err := r.db.Exec(query, id)
+
+	return err
+}

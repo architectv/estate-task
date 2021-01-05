@@ -1,9 +1,10 @@
 package handler
 
 import (
+	"strconv"
+
 	"github.com/architectv/property-task/pkg/model"
 	"github.com/gofiber/fiber/v2"
-	"github.com/sirupsen/logrus"
 )
 
 func (h *Handler) createRoom(ctx *fiber.Ctx) error {
@@ -11,7 +12,6 @@ func (h *Handler) createRoom(ctx *fiber.Ctx) error {
 	if err := ctx.BodyParser(input); err != nil {
 		return sendError(ctx, fiber.StatusBadRequest, err)
 	}
-	logrus.Println(string(ctx.Body()))
 
 	id, err := h.services.Room.Create(input)
 	if err != nil {
@@ -22,7 +22,17 @@ func (h *Handler) createRoom(ctx *fiber.Ctx) error {
 }
 
 func (h *Handler) deleteRoom(ctx *fiber.Ctx) error {
-	return ctx.SendString(implementMe())
+	id, err := strconv.Atoi(ctx.Params("id"))
+	if err != nil || id <= 0 {
+		return sendError(ctx, fiber.StatusBadRequest, err)
+	}
+
+	err = h.services.Room.Delete(id)
+	if err != nil {
+		return sendError(ctx, fiber.StatusInternalServerError, err)
+	}
+
+	return ctx.JSON(fiber.Map{})
 }
 
 func (h *Handler) getAllRooms(ctx *fiber.Ctx) error {

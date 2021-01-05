@@ -24,3 +24,7 @@ func (s *RoomService) Create(room *model.Room) (int, error) {
 	}
 	return s.repo.Create(room)
 }
+
+func (s *RoomService) Delete(id int) error {
+	return s.repo.Delete(id)
+}
