@@ -34,3 +34,13 @@ func (r *BookingPostgres) Delete(id int) error {
 
 	return err
 }
+
+func (r *BookingPostgres) GetByRoomId(roomId int) ([]*model.Booking, error) {
+	var bookings []*model.Booking
+
+	query := fmt.Sprintf(
+		`SELECT * FROM %s WHERE room_id=$1 ORDER BY date_start`, bookingsTable)
+	err := r.db.Select(&bookings, query, roomId)
+
+	return bookings, err
+}

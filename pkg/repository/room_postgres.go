@@ -35,7 +35,7 @@ func (r *RoomPostgres) Delete(id int) error {
 	return err
 }
 
-func (r *RoomPostgres) GetAllRooms(sortField string, asc bool) ([]*model.Room, error) {
+func (r *RoomPostgres) GetAll(sortField string, asc bool) ([]*model.Room, error) {
 	var rooms []*model.Room
 
 	query := fmt.Sprintf("SELECT * FROM %s ORDER BY %s", roomsTable, sortField)

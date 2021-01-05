@@ -29,6 +29,6 @@ func (s *RoomService) Delete(id int) error {
 	return s.repo.Delete(id)
 }
 
-func (s *RoomService) GetAllRooms(sortField string, asc bool) ([]*model.Room, error) {
-	return s.repo.GetAllRooms(sortField, asc)
+func (s *RoomService) GetAll(sortField string, asc bool) ([]*model.Room, error) {
+	return s.repo.GetAll(sortField, asc)
 }

@@ -8,12 +8,13 @@ import (
 type Room interface {
 	Create(room *model.Room) (int, error)
 	Delete(id int) error
-	GetAllRooms(sortField string, asc bool) ([]*model.Room, error)
+	GetAll(sortField string, asc bool) ([]*model.Room, error)
 }
 
 type Booking interface {
-	Create(roomId int, dateStart, dateEnd string) (int, error)
+	Create(booking *model.Booking) (int, error)
 	Delete(id int) error
+	GetByRoomId(roomId int) ([]*model.Booking, error)
 }
 
 type Service struct {

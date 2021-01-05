@@ -20,15 +20,15 @@ func NewHandler(services *service.Service) *Handler {
 func (h *Handler) InitRoutes(router fiber.Router) {
 	rooms := router.Group("/rooms")
 	{
-		rooms.Post("/create", h.createRoom)
+		rooms.Post("/", h.createRoom)
 		rooms.Delete("/:id", h.deleteRoom)
-		rooms.Get("/list", h.getAllRooms)
+		rooms.Get("/", h.getAllRooms)
 	}
 	bookings := router.Group("/bookings")
 	{
-		bookings.Post("/create", h.createBooking)
+		bookings.Post("/", h.createBooking)
 		bookings.Delete("/:id", h.deleteBooking)
-		bookings.Get("/list", h.getBookingsByRoomId)
+		bookings.Get("/", h.getBookingsByRoomId)
 	}
 }
 

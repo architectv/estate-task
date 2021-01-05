@@ -55,10 +55,10 @@ func (h *Handler) getAllRooms(ctx *fiber.Ctx) error {
 		return sendError(ctx, fiber.StatusBadRequest, errors.New("wrong sort param"))
 	}
 
-	rooms, err := h.services.Room.GetAllRooms(sortField, asc)
+	rooms, err := h.services.Room.GetAll(sortField, asc)
 	if err != nil {
 		return sendError(ctx, fiber.StatusInternalServerError, err)
 	}
 
-	return ctx.JSON(fiber.Map{"rooms": rooms})
+	return ctx.JSON(rooms)
 }
