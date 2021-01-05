@@ -24,6 +24,7 @@ func (h *Handler) createRoom(ctx *fiber.Ctx) error {
 
 func (h *Handler) deleteRoom(ctx *fiber.Ctx) error {
 	id, err := strconv.Atoi(ctx.Params("id"))
+	// TODO: check id in service
 	if err != nil || id <= 0 {
 		return sendError(ctx, fiber.StatusBadRequest, err)
 	}

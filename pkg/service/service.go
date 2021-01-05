@@ -12,6 +12,7 @@ type Room interface {
 }
 
 type Booking interface {
+	Create(roomId int, dateStart, dateEnd string) (int, error)
 }
 
 type Service struct {
@@ -21,6 +22,7 @@ type Service struct {
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		Room: NewRoomService(repos.Room),
+		Room:    NewRoomService(repos.Room),
+		Booking: NewBookingService(repos.Booking),
 	}
 }

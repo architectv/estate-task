@@ -12,6 +12,7 @@ type Room interface {
 }
 
 type Booking interface {
+	Create(booking *model.Booking) (int, error)
 }
 
 type Repository struct {
@@ -21,6 +22,7 @@ type Repository struct {
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		Room: NewRoomPostgres(db),
+		Room:    NewRoomPostgres(db),
+		Booking: NewBookingPostgres(db),
 	}
 }

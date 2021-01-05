@@ -2,6 +2,8 @@ package model
 
 import "time"
 
+const DateFormat = "2006-01-02"
+
 type Booking struct {
 	Id        int       `json:"id" db:"id"`
 	RoomId    int       `json:"room_id" db:"room_id"`
