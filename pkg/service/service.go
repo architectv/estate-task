@@ -1,8 +1,12 @@
 package service
 
-import "github.com/architectv/property-task/pkg/repository"
+import (
+	"github.com/architectv/property-task/pkg/model"
+	"github.com/architectv/property-task/pkg/repository"
+)
 
 type Room interface {
+	Create(room *model.Room) (int, error)
 }
 
 type Booking interface {
@@ -14,5 +18,7 @@ type Service struct {
 }
 
 func NewService(repos *repository.Repository) *Service {
-	return &Service{}
+	return &Service{
+		Room: NewRoomService(repos.Room),
+	}
 }

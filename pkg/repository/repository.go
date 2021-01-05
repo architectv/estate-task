@@ -1,8 +1,12 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/architectv/property-task/pkg/model"
+	"github.com/jmoiron/sqlx"
+)
 
 type Room interface {
+	Create(room *model.Room) (int, error)
 }
 
 type Booking interface {
@@ -14,5 +18,7 @@ type Repository struct {
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
-	return &Repository{}
+	return &Repository{
+		Room: NewRoomPostgres(db),
+	}
 }

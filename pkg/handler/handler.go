@@ -6,6 +6,7 @@ import (
 
 	"github.com/architectv/property-task/pkg/service"
 	"github.com/gofiber/fiber/v2"
+	"github.com/sirupsen/logrus"
 )
 
 type Handler struct {
@@ -29,6 +30,12 @@ func (h *Handler) InitRoutes(router fiber.Router) {
 		bookings.Delete("/:id", h.deleteBooking)
 		bookings.Get("/list", h.getBookingsByRoomId)
 	}
+}
+
+func sendError(ctx *fiber.Ctx, status int, err error) error {
+	logrus.Error(err.Error())
+	ctx.Status(status)
+	return ctx.JSON(fiber.Map{"error": err.Error()})
 }
 
 func implementMe() string {
