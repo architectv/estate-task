@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"errors"
 	"strconv"
 
+	. "github.com/architectv/property-task/pkg/error"
 	"github.com/architectv/property-task/pkg/model"
 	"github.com/gofiber/fiber/v2"
 )
@@ -16,6 +16,9 @@ func (h *Handler) createRoom(ctx *fiber.Ctx) error {
 
 	id, err := h.services.Room.Create(input)
 	if err != nil {
+		if err == ErrEmptyDescription || err == ErrNotPositivePrice {
+			return sendError(ctx, fiber.StatusBadRequest, err)
+		}
 		return sendError(ctx, fiber.StatusInternalServerError, err)
 	}
 
@@ -24,13 +27,15 @@ func (h *Handler) createRoom(ctx *fiber.Ctx) error {
 
 func (h *Handler) deleteRoom(ctx *fiber.Ctx) error {
 	id, err := strconv.Atoi(ctx.Params("id"))
-	// TODO: check id in service
-	if err != nil || id <= 0 {
+	if err != nil {
 		return sendError(ctx, fiber.StatusBadRequest, err)
 	}
 
 	err = h.services.Room.Delete(id)
 	if err != nil {
+		if err == ErrNotPositiveId {
+			return sendError(ctx, fiber.StatusBadRequest, err)
+		}
 		return sendError(ctx, fiber.StatusInternalServerError, err)
 	}
 
@@ -38,25 +43,13 @@ func (h *Handler) deleteRoom(ctx *fiber.Ctx) error {
 }
 
 func (h *Handler) getAllRooms(ctx *fiber.Ctx) error {
-	sortField := "id"
-	asc := true
+	sortField := ctx.Query("sort")
 
-	sort := ctx.Query("sort")
-	// TODO: check sort in seervice
-	if len(sort) > 2 {
-		if sort[0] == '-' {
-			asc = false
-			sort = sort[1:]
-		}
-	}
-	if sort == "price" || sort == "id" {
-		sortField = sort
-	} else if sort != "" {
-		return sendError(ctx, fiber.StatusBadRequest, errors.New("wrong sort param"))
-	}
-
-	rooms, err := h.services.Room.GetAll(sortField, asc)
+	rooms, err := h.services.Room.GetAll(sortField)
 	if err != nil {
+		if err == ErrWrongSortField {
+			return sendError(ctx, fiber.StatusBadRequest, err)
+		}
 		return sendError(ctx, fiber.StatusInternalServerError, err)
 	}
 
