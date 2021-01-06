@@ -3,6 +3,7 @@ package handler
 import (
 	"strconv"
 
+	. "github.com/architectv/property-task/pkg/error"
 	"github.com/architectv/property-task/pkg/model"
 	"github.com/gofiber/fiber/v2"
 )
@@ -15,7 +16,9 @@ func (h *Handler) createBooking(ctx *fiber.Ctx) error {
 
 	id, err := h.services.Booking.Create(input)
 	if err != nil {
-		// TODO: check error type
+		if err == ErrWrongRoomId || err == ErrWrongDates {
+			return sendError(ctx, fiber.StatusBadRequest, err)
+		}
 		return sendError(ctx, fiber.StatusInternalServerError, err)
 	}
 
@@ -30,7 +33,9 @@ func (h *Handler) deleteBooking(ctx *fiber.Ctx) error {
 
 	err = h.services.Booking.Delete(id)
 	if err != nil {
-		// TODO: check error type
+		if err == ErrWrongBookingId {
+			return sendError(ctx, fiber.StatusBadRequest, err)
+		}
 		return sendError(ctx, fiber.StatusInternalServerError, err)
 	}
 
@@ -42,8 +47,12 @@ func (h *Handler) getBookingsByRoomId(ctx *fiber.Ctx) error {
 	if err != nil {
 		return sendError(ctx, fiber.StatusBadRequest, err)
 	}
+
 	bookings, err := h.services.Booking.GetByRoomId(roomId)
 	if err != nil {
+		if err == ErrWrongRoomId {
+			return sendError(ctx, fiber.StatusBadRequest, err)
+		}
 		return sendError(ctx, fiber.StatusInternalServerError, err)
 	}
 

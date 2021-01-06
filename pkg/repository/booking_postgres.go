@@ -44,3 +44,11 @@ func (r *BookingPostgres) GetByRoomId(roomId int) ([]*model.Booking, error) {
 
 	return bookings, err
 }
+
+func (r *BookingPostgres) GetById(id int) (*model.Booking, error) {
+	booking := &model.Booking{}
+	query := fmt.Sprintf("SELECT * FROM %s WHERE id=$1", bookingsTable)
+	err := r.db.Get(booking, query, id)
+
+	return booking, err
+}

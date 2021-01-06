@@ -33,7 +33,7 @@ func (h *Handler) deleteRoom(ctx *fiber.Ctx) error {
 
 	err = h.services.Room.Delete(id)
 	if err != nil {
-		if err == ErrNotPositiveId {
+		if err == ErrWrongRoomId {
 			return sendError(ctx, fiber.StatusBadRequest, err)
 		}
 		return sendError(ctx, fiber.StatusInternalServerError, err)

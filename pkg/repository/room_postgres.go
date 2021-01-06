@@ -46,3 +46,11 @@ func (r *RoomPostgres) GetAll(sortField string, desc bool) ([]*model.Room, error
 
 	return rooms, err
 }
+
+func (r *RoomPostgres) GetById(id int) (*model.Room, error) {
+	room := &model.Room{}
+	query := fmt.Sprintf("SELECT * FROM %s WHERE id=$1", roomsTable)
+	err := r.db.Get(room, query, id)
+
+	return room, err
+}

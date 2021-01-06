@@ -26,9 +26,11 @@ func (s *RoomService) Create(room *model.Room) (int, error) {
 }
 
 func (s *RoomService) Delete(id int) error {
-	if id <= 0 {
-		return ErrNotPositiveId
+	_, err := s.repo.GetById(id)
+	if err != nil {
+		return ErrWrongRoomId
 	}
+
 	return s.repo.Delete(id)
 }
 

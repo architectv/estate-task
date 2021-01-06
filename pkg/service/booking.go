@@ -1,55 +1,46 @@
 package service
 
 import (
-	"errors"
-
+	. "github.com/architectv/property-task/pkg/error"
 	"github.com/architectv/property-task/pkg/model"
 	"github.com/architectv/property-task/pkg/repository"
 )
 
 type BookingService struct {
-	repo repository.Booking
+	repo     repository.Booking
+	roomRepo repository.Room
 }
 
-func NewBookingService(repo repository.Booking) *BookingService {
-	return &BookingService{repo: repo}
+func NewBookingService(repo repository.Booking, roomRepo repository.Room) *BookingService {
+	return &BookingService{repo: repo, roomRepo: roomRepo}
 }
 
-// TODO: errors in separate file
 func (s *BookingService) Create(booking *model.Booking) (int, error) {
-	// TODO: check if roomId exists
-	// dateStart, err := time.Parse(model.DateFormat, dateStartStr)
-	// if err != nil {
-	// 	return 0, errors.New("bad date_start")
-	// }
-	// dateEnd, err := time.Parse(model.DateFormat, dateEndStr)
-	// if err != nil {
-	// 	return 0, errors.New("bad date_end")
-	// }
-	if booking.RoomId <= 0 {
-		return 0, errors.New("room_id should be positive")
+	_, err := s.roomRepo.GetById(booking.RoomId)
+	if err != nil {
+		return 0, ErrWrongRoomId
 	}
-	if booking.DateStart.After(booking.DateEnd) {
-		return 0, errors.New("date_start after date_end")
+	if !booking.DateStart.Before(booking.DateEnd) {
+		return 0, ErrWrongDates
 	}
-	// booking := &model.Booking{
-	// 	RoomId:    roomId,
-	// 	DateStart: dateStart,
-	// 	DateEnd:   dateEnd,
-	// }
+
 	return s.repo.Create(booking)
 }
 
 func (s *BookingService) Delete(id int) error {
-	if id <= 0 {
-		return errors.New("id should be positive")
+	_, err := s.repo.GetById(id)
+	if err != nil {
+		return ErrWrongBookingId
 	}
+
 	return s.repo.Delete(id)
 }
 
 func (s *BookingService) GetByRoomId(roomId int) ([]*model.Booking, error) {
-	if roomId <= 0 {
-		return nil, errors.New("room_id should be positive")
+	_, err := s.roomRepo.GetById(roomId)
+	if err != nil {
+		return nil, ErrWrongRoomId
 	}
+
 	return s.repo.GetByRoomId(roomId)
 }

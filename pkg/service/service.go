@@ -25,6 +25,6 @@ type Service struct {
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Room:    NewRoomService(repos.Room),
-		Booking: NewBookingService(repos.Booking),
+		Booking: NewBookingService(repos.Booking, repos.Room),
 	}
 }
