@@ -269,7 +269,22 @@ func TestRoomPostgres_GetAll(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Empty Sosrt Field",
+			name: "Ok Empty List",
+			input: args{
+				sortField: "id",
+				desc:      false,
+			},
+			mock: func() {
+				rows := sqlmock.NewRows([]string{"id", "description", "price"})
+
+				mock.ExpectQuery(fmt.Sprintf("SELECT (.+) FROM %s ORDER BY (.+)", roomsTable)).
+					WillReturnRows(rows)
+			},
+			want:    nil,
+			wantErr: false,
+		},
+		{
+			name: "Empty Sort Field",
 			input: args{
 				sortField: "",
 				desc:      false,
@@ -281,7 +296,7 @@ func TestRoomPostgres_GetAll(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "Wrong Sosrt Field",
+			name: "Wrong Sort Field",
 			input: args{
 				sortField: "wrong",
 				desc:      false,
