@@ -119,7 +119,7 @@ func TestRoomService_Delete(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Wrong room_id",
+			name: "Wrong Room Id",
 			input: args{
 				id: 1,
 			},
