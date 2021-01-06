@@ -220,16 +220,16 @@ func TestRoomService_GetAll(t *testing.T) {
 			},
 			mock: func(r *mock_repository.MockRoom) {
 				rooms := []*model.Room{
+					{Id: 1, Description: "description1", Price: 1000},
 					{Id: 3, Description: "description3", Price: 3000},
 					{Id: 2, Description: "description2", Price: 5000},
-					{Id: 1, Description: "description1", Price: 1000},
 				}
 				r.EXPECT().GetAll(gomock.Any(), gomock.Any()).Return(rooms, nil)
 			},
 			want: []*model.Room{
+				{Id: 1, Description: "description1", Price: 1000},
 				{Id: 3, Description: "description3", Price: 3000},
 				{Id: 2, Description: "description2", Price: 5000},
-				{Id: 1, Description: "description1", Price: 1000},
 			},
 			wantErr: false,
 		},
