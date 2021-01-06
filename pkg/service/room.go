@@ -35,16 +35,20 @@ func (s *RoomService) Delete(id int) error {
 }
 
 func (s *RoomService) GetAll(sortField string) ([]*model.Room, error) {
+	const (
+		idField    = "id"
+		priceField = "price"
+	)
 	desc := false
 
 	if sortField == "" {
-		sortField = "id"
+		sortField = idField
 	} else if len(sortField) >= 2 {
 		if sortField[0] == '-' {
 			desc = true
 			sortField = sortField[1:]
 		}
-		if sortField != "id" && sortField != "price" {
+		if sortField != idField && sortField != priceField {
 			return nil, ErrWrongSortField
 		}
 	} else {

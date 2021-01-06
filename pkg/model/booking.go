@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// year-month-day
 const DateFormat = "2006-01-02"
 
 type Booking struct {
