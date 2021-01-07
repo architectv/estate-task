@@ -7,8 +7,10 @@ run:
 run_test:
 	go test ./... -cover
 
+DB='postgres://postgres:1234@0.0.0.0:5432/property?sslmode=disable'
+
 migrate_up:
-	migrate -path ./scripts -database 'postgres://postgres:1234@0.0.0.0:5436/postgres?sslmode=disable' up
+	migrate -path ./scripts -database $(DB) up
 
 migrate_down:
-	migrate -path ./scripts -database 'postgres://postgres:1234@0.0.0.0:5436/postgres?sslmode=disable' down
+	migrate -path ./scripts -database $(DB) down
