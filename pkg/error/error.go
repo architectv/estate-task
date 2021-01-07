@@ -9,4 +9,5 @@ var (
 	ErrWrongRoomId      = errors.New("wrong room_id")
 	ErrWrongDates       = errors.New("date_start should be before date_end")
 	ErrWrongBookingId   = errors.New("wrong booking_id")
+	ErrInternalService  = errors.New("something went wrong")
 )

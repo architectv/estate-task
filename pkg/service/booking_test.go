@@ -1,7 +1,6 @@
 package service
 
 import (
-	"errors"
 	"testing"
 	"time"
 
@@ -80,7 +79,7 @@ func TestBookingService_Create(t *testing.T) {
 			},
 			mock: func(repo *mock_repository.MockBooking, roomRepo *mock_repository.MockRoom, args args) {
 				roomRepo.EXPECT().GetById(args.booking.RoomId).Return(&model.Room{}, nil)
-				repo.EXPECT().Create(args.booking).Return(0, errors.New("some error"))
+				repo.EXPECT().Create(args.booking).Return(0, ErrInternalService)
 			},
 			wantErr: true,
 		},
@@ -147,7 +146,7 @@ func TestBookingService_Delete(t *testing.T) {
 			},
 			mock: func(r *mock_repository.MockBooking, args args) {
 				r.EXPECT().GetById(args.id).Return(&model.Booking{}, nil)
-				r.EXPECT().Delete(args.id).Return(errors.New("some error"))
+				r.EXPECT().Delete(args.id).Return(ErrInternalService)
 			},
 			wantErr: true,
 		},
@@ -242,7 +241,7 @@ func TestRoomService_GetByRoomId(t *testing.T) {
 			},
 			mock: func(repo *mock_repository.MockBooking, roomRepo *mock_repository.MockRoom, args args) {
 				roomRepo.EXPECT().GetById(args.roomId).Return(&model.Room{}, nil)
-				repo.EXPECT().GetByRoomId(args.roomId).Return(nil, errors.New("some error"))
+				repo.EXPECT().GetByRoomId(args.roomId).Return(nil, ErrInternalService)
 			},
 			wantErr: true,
 		},

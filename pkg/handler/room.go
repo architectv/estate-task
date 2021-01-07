@@ -39,7 +39,7 @@ func (h *Handler) deleteRoom(ctx *fiber.Ctx) error {
 		return sendError(ctx, fiber.StatusInternalServerError, err)
 	}
 
-	return ctx.JSON(fiber.Map{})
+	return ctx.SendStatus(fiber.StatusOK)
 }
 
 func (h *Handler) getAllRooms(ctx *fiber.Ctx) error {

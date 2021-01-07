@@ -1,7 +1,6 @@
 package service
 
 import (
-	"errors"
 	"testing"
 
 	. "github.com/architectv/property-task/pkg/error"
@@ -69,7 +68,7 @@ func TestRoomService_Create(t *testing.T) {
 				},
 			},
 			mock: func(r *mock_repository.MockRoom, args args) {
-				r.EXPECT().Create(args.room).Return(0, errors.New("some error"))
+				r.EXPECT().Create(args.room).Return(0, ErrInternalService)
 			},
 			wantErr: true,
 		},
@@ -135,7 +134,7 @@ func TestRoomService_Delete(t *testing.T) {
 			},
 			mock: func(r *mock_repository.MockRoom, args args) {
 				r.EXPECT().GetById(args.id).Return(&model.Room{}, nil)
-				r.EXPECT().Delete(args.id).Return(errors.New("some error"))
+				r.EXPECT().Delete(args.id).Return(ErrInternalService)
 			},
 			wantErr: true,
 		},
@@ -303,7 +302,7 @@ func TestRoomService_GetAll(t *testing.T) {
 				sortField: "id",
 			},
 			mock: func(r *mock_repository.MockRoom) {
-				r.EXPECT().GetAll(gomock.Any(), gomock.Any()).Return(nil, errors.New("some error"))
+				r.EXPECT().GetAll(gomock.Any(), gomock.Any()).Return(nil, ErrInternalService)
 			},
 			wantErr: true,
 		},

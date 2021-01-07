@@ -2,10 +2,10 @@ package repository
 
 import (
 	"database/sql"
-	"errors"
 	"fmt"
 	"testing"
 
+	. "github.com/architectv/property-task/pkg/error"
 	"github.com/architectv/property-task/pkg/model"
 	"github.com/stretchr/testify/assert"
 	sqlmock "github.com/zhashkevych/go-sqlxmock"
@@ -291,7 +291,7 @@ func TestRoomPostgres_GetAll(t *testing.T) {
 			},
 			mock: func() {
 				mock.ExpectQuery(fmt.Sprintf("SELECT (.+) FROM %s ORDER BY (.+)", roomsTable)).
-					WillReturnError(errors.New("some error"))
+					WillReturnError(ErrInternalService)
 			},
 			wantErr: true,
 		},
@@ -303,7 +303,7 @@ func TestRoomPostgres_GetAll(t *testing.T) {
 			},
 			mock: func() {
 				mock.ExpectQuery(fmt.Sprintf("SELECT (.+) FROM %s ORDER BY (.+)", roomsTable)).
-					WillReturnError(errors.New("some error"))
+					WillReturnError(ErrInternalService)
 			},
 			wantErr: true,
 		},
