@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.com/architectv/estate-task.svg?branch=main)](https://travis-ci.com/architectv/estate-task)
 [![Go Report Card](https://goreportcard.com/badge/github.com/architectv/estate-task)](https://goreportcard.com/report/github.com/architectv/estate-task)
+[![CodeFactor](https://www.codefactor.io/repository/github/architectv/estate-task/badge)](https://www.codefactor.io/repository/github/architectv/estate-task)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/architectv/estate-task/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/architectv/estate-task/?branch=main)
 [![Code Coverage](https://scrutinizer-ci.com/g/architectv/estate-task/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/architectv/estate-task/?branch=main)
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/architectv/estate-task)
@@ -9,6 +10,8 @@
 ![Github Repository Size](https://img.shields.io/github/repo-size/architectv/estate-task)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![GitHub last commit](https://img.shields.io/github/last-commit/architectv/estate-task)
+
+Сервис для управления номерами отеля и бронированиями.
 
 <!-- ToC start -->
 # Содержание
@@ -42,8 +45,8 @@ make run_test
 
 # API
 
-> 1) Тело запроса (ответа) - в формате JSON.
-> 2) В случае ошибки возвращается необходимый HTTP код, в теле содержится описание ошибки. Пример: ```{"error": "something went wrong"}```.
+> 1) Тело запроса/ответа - в формате JSON.
+> 2) В случае ошибки возвращается необходимый HTTP код, в теле содержится описание ошибки (пример: ```{"error": "something went wrong"}```).
 
 ## POST /rooms/
 
@@ -211,17 +214,17 @@ curl -X GET localhost:9000/bookings/?room_id=144
     {
         "booking_id": 289,
         "date_start": "2021-01-04",
-	    "date_end": "2021-01-08"
+	"date_end": "2021-01-08"
     },
     {
         "booking_id": 121,
         "date_start": "2021-12-30",
-	    "date_end": "2022-01-02"
+	"date_end": "2022-01-02"
     },
     {
         "booking_id": 256,
         "date_start": "2022-03-01",
-	    "date_end": "2022-03-12"
+	"date_end": "2022-03-12"
     },
 ]
 ```
