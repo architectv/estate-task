@@ -55,11 +55,11 @@ func main() {
 
 	logrus.Println("Gracefully shutting down...")
 	if err := app.Shutdown(); err != nil {
-		logrus.Errorf("error occured on server shutting down: %s", err.Error())
+		logrus.Errorf("error occurred on server shutting down: %s", err.Error())
 	}
 
 	if err := db.Close(); err != nil {
-		logrus.Errorf("error occured on db connection close: %s", err.Error())
+		logrus.Errorf("error occurred on db connection close: %s", err.Error())
 	}
 }
 
