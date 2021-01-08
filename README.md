@@ -2,8 +2,11 @@
 
 [![Build Status](https://travis-ci.com/architectv/estate-task.svg?branch=main)](https://travis-ci.com/architectv/estate-task)
 [![Go Report Card](https://goreportcard.com/badge/github.com/architectv/estate-task)](https://goreportcard.com/report/github.com/architectv/estate-task)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/architectv/estate-task/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/architectv/estate-task/?branch=main)
+[![Code Coverage](https://scrutinizer-ci.com/g/architectv/estate-task/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/architectv/estate-task/?branch=main)
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/architectv/estate-task)
 ![Lines of code](https://img.shields.io/tokei/lines/github/architectv/estate-task)
+![Github Repository Size](https://img.shields.io/github/repo-size/architectv/estate-task)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![GitHub last commit](https://img.shields.io/github/last-commit/architectv/estate-task)
 
@@ -184,7 +187,7 @@ curl -X DELETE localhost:9000/bookings/121
  
 ## GET /bookings/
 
-Получение списка бронирований номера отеля
+Получение списка бронирований номера отеля.
 
 - Параметры строки запроса:
     - room_id - идентификатор номера отеля.
