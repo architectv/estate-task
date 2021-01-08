@@ -1,7 +1,7 @@
 # :hotel: Тестовое задание Avito.Недвижимость
 
 [![Build Status](https://travis-ci.com/architectv/estate-task.svg?branch=main)](https://travis-ci.com/architectv/estate-task)
-![Go Report](https://goreportcard.com/badge/github.com/architectv/estate-task)
+[![Go Report Card](https://goreportcard.com/badge/github.com/architectv/estate-task)](https://goreportcard.com/report/github.com/architectv/estate-task)
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/architectv/estate-task)
 ![Lines of code](https://img.shields.io/tokei/lines/github/architectv/estate-task)
 ![License](https://img.shields.io/badge/license-MIT-green)
