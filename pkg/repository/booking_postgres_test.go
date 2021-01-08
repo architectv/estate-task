@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/architectv/property-task/pkg/model"
+	"github.com/architectv/estate-task/pkg/model"
 	"github.com/stretchr/testify/assert"
 	sqlmock "github.com/zhashkevych/go-sqlxmock"
 )

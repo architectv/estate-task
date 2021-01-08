@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/architectv/property-task/pkg/error"
-	"github.com/architectv/property-task/pkg/model"
-	mock_repository "github.com/architectv/property-task/pkg/repository/mock"
+	. "github.com/architectv/estate-task/pkg/error"
+	"github.com/architectv/estate-task/pkg/model"
+	mock_repository "github.com/architectv/estate-task/pkg/repository/mock"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )

@@ -3,8 +3,8 @@ package handler
 import (
 	"strconv"
 
-	. "github.com/architectv/property-task/pkg/error"
-	"github.com/architectv/property-task/pkg/model"
+	. "github.com/architectv/estate-task/pkg/error"
+	"github.com/architectv/estate-task/pkg/model"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -39,7 +39,7 @@ func (h *Handler) deleteBooking(ctx *fiber.Ctx) error {
 		return sendError(ctx, fiber.StatusInternalServerError, err)
 	}
 
-	return ctx.SendStatus(fiber.StatusOK)
+	return ctx.JSON("OK")
 }
 
 func (h *Handler) getBookingsByRoomId(ctx *fiber.Ctx) error {

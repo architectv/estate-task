@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/architectv/property-task/pkg/service"
+	"github.com/architectv/estate-task/pkg/service"
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 )

@@ -1,4 +1,4 @@
-module github.com/architectv/property-task
+module github.com/architectv/estate-task
 
 go 1.15
 

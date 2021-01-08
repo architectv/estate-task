@@ -1,5 +1,12 @@
 # :hotel: Тестовое задание Avito.Недвижимость
 
+[![Build Status](https://travis-ci.com/architectv/estate-task.svg?branch=main)](https://travis-ci.com/architectv/estate-task)
+![Go Report](https://goreportcard.com/badge/github.com/architectv/estate-task)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/architectv/estate-task)
+![Lines of code](https://img.shields.io/tokei/lines/github/architectv/estate-task)
+![License](https://img.shields.io/badge/license-MIT-green)
+![GitHub last commit](https://img.shields.io/github/last-commit/architectv/estate-task)
+
 <!-- ToC start -->
 # Содержание
 
@@ -32,7 +39,8 @@ make run_test
 
 # API
 
-> В случае ошибки возвращается необходимый HTTP код, в теле содержится описание ошибки в JSON. Пример: ```{"error": "something went wrong"}```.
+> 1) Тело запроса (ответа) - в формате JSON.
+> 2) В случае ошибки возвращается необходимый HTTP код, в теле содержится описание ошибки. Пример: ```{"error": "something went wrong"}```.
 
 ## POST /rooms/
 
@@ -65,7 +73,7 @@ curl -X POST localhost:9000/rooms/ \
 }
 ```
 
-## DELETE /rooms/{id}
+## DELETE /rooms/:id
 
 Удаление номера отеля.
 
@@ -217,7 +225,7 @@ curl -X GET localhost:9000/bookings/?room_id=144
 
 # Реализация
 
-- Следование дизайну REST API.
+- Следование дизайну REST JSON API.
 - Подход "Чистой Архитектуры" и техника внедрения зависимости.
 - Работа с фреймворком [fiber](https://github.com/gofiber/fiber).
 - Работа с БД Postgres с использованием библиотеки [sqlx](https://github.com/jmoiron/sqlx) и написанием SQL запросов.

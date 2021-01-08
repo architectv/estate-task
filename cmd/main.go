@@ -5,9 +5,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/architectv/property-task/pkg/handler"
-	"github.com/architectv/property-task/pkg/repository"
-	"github.com/architectv/property-task/pkg/service"
+	"github.com/architectv/estate-task/pkg/handler"
+	"github.com/architectv/estate-task/pkg/repository"
+	"github.com/architectv/estate-task/pkg/service"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/sirupsen/logrus"

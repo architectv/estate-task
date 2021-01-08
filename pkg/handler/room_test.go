@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"testing"
 
-	. "github.com/architectv/property-task/pkg/error"
-	"github.com/architectv/property-task/pkg/model"
-	"github.com/architectv/property-task/pkg/service"
-	mock_service "github.com/architectv/property-task/pkg/service/mock"
+	. "github.com/architectv/estate-task/pkg/error"
+	"github.com/architectv/estate-task/pkg/model"
+	"github.com/architectv/estate-task/pkg/service"
+	mock_service "github.com/architectv/estate-task/pkg/service/mock"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
@@ -142,7 +142,7 @@ func TestHandler_deleteRoom(t *testing.T) {
 				r.EXPECT().Delete(roomId).Return(nil)
 			},
 			expectedStatusCode:   fiber.StatusOK,
-			expectedResponseBody: "OK",
+			expectedResponseBody: `"OK"`,
 		},
 		{
 			name:        "Wrong Room Id",
