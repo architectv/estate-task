@@ -239,7 +239,7 @@ curl -X GET localhost:9000/bookings/?room_id=144
 - Реализация Graceful Shutdown.
 - Запуск из Docker.
 - Юнит-тестирование с помощью моков - библиотеки [testify](https://github.com/stretchr/testify), [mock](https://github.com/golang/mock).
-- Непрерывная интеграция, запуск тестов в Travis CI.
+- Непрерывная интеграция, запуск тестов в Travis CI, анализ и покрытие в Scrutinizer CI.
 
 **Структура проекта**
 ```

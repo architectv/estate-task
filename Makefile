@@ -1,10 +1,10 @@
 APP=app
 
 build:
-	docker-compose build $(app)
+	docker-compose build $(APP)
 
 run:
-	docker-compose up $(app)
+	docker-compose up $(APP)
 
 run_test:
 	go test ./... -cover
